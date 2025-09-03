@@ -1,0 +1,24 @@
+Package: softHybridImpute
+Type: Package
+Title: Soft Hybrid Imputation for Proteomics Missing Values
+Version: 0.1.0
+Authors@R: 
+    person("Yixin", "Shi", 
+           email = "yixin.shi@wolfson.ox.ac.uk", 
+           role = c("aut", "cre"))
+Description: Provides soft hybrid imputation for proteomics missing values
+    by blending Random Forest and MinProb imputations with dynamic weighting
+    based on protein missing rate and mean abundance. Includes visualization of weights.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Depends: R (>= 4.1)
+Imports:
+    ggplot2,
+    scales,
+    grid,
+    stats
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
