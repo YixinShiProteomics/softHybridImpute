@@ -25,11 +25,14 @@ library(softHybridImpute)
 
 ## More Information
 A detailed description of the SoftHybrid framework, together with full benchmarking analyses, is available in our preprint:
+
 Shi, Y. *et al.* **SoftHybrid: A Hybrid Imputation Algorithm Optimised for Single-Cell Proteomics Data.** bioRxiv, 2025.
 
 ## Contact
 For questions or suggestions, please open an issue on the GitHub repository:
+
 Issues: https://github.com/YixinShiProteomics/softHybridImpute/issues
+
 Maintainer: Yixin Shi (yixin.shi@wolfson.ox.ac.uk)
 
 
