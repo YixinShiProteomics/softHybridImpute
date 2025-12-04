@@ -29,7 +29,7 @@
 soft_hybrid_impute <- function(df_rf, df_minProb, df_raw,
                                r0 = NULL, x0 = NULL, a = 10, b = 5, lambda = 0.5,
                                visualize = TRUE, group_name = NULL,
-                               save_dir = "./SoftHybrid_DIA") {
+                               save_dir = "./SoftHybrid") {
   stopifnot(all(dim(df_rf) == dim(df_minProb)))
   stopifnot(all(rownames(df_rf) == rownames(df_minProb)))
 
