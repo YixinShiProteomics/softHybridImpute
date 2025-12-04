@@ -52,6 +52,37 @@ Output:
   
   - GroupName_SoftHybrid_plot.tiff — a scatter plot showing RF weights
   - GroupName_SoftHybrid_plot.rds — ggplot object for editing
+ 
+### Run SoftHybrid across multiple groups
+If your dataset is naturally divided (e.g., doses, conditions, acquisition modes), prepare three named lists:
+```r
+raw_list     <- list(Dose1 = df_raw1,     Dose2 = df_raw2)
+rf_list      <- list(Dose1 = rf1,         Dose2 = rf2)
+minProb_list <- list(Dose1 = minp1,       Dose2 = minp2)
+```
+Then run:
+```r
+results <- run_soft_hybrid_all_groups(
+  raw_list,
+  rf_list,
+  minProb_list,
+  lambda = 0.5,  # MAR/MNAR balance
+  a = 10,        # missing-rate sigmoid steepness
+  b = 5,         # intensity sigmoid steepness
+  visualize = TRUE
+)
+```
+Each element of results is a fully imputed matrix.
+
+### Suggested Workflow
+- Perform basic QC filtering.
+- Perform Normalisation.
+- Generate two independent imputations:
+  - RF (MAR-oriented)
+  - MinProb (MNAR-oriented)
+- Apply SoftHybrid:
+  - Visualize weight scatterplot
+  - Export fully imputed matrices
 
 ## More Information
 A detailed description of the SoftHybrid framework, together with full benchmarking analyses, is available in our preprint:
