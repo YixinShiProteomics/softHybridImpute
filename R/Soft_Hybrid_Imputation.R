@@ -16,7 +16,7 @@
 #' @param lambda Trade-off between missing-rate and intensity (0–1, default 0.5).
 #' @param visualize Logical. If TRUE, saves a TIFF + Rdata of the weight plot.
 #' @param group_name Optional character used in plot titles/filenames.
-#' @param save_dir Directory to save plots (default "./SoftHybrid_DIA").
+#' @param save_dir Directory to save plots (default "./SoftHybrid").
 #'
 #' @return A matrix with soft-hybrid imputed values (same dim as inputs).
 #' @export
