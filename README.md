@@ -23,6 +23,36 @@ Then load the package:
 library(softHybridImpute)
 ```
 
+## Quick Start
+### Prepare Inputs
+SoftHybrid needs three matrices with identical dimensions and rownames:
+- **df_raw:** Raw intensity matrix containing missing values (NA).
+- **df_rf:** RF-imputed version of the same matrix (e.g., generated using missForest).
+- **df_minProb:** MinProb-imputed version (e.g., using MSnbase or imputeLCMD).
+
+All three must have:
+```r
+rows = proteins/features
+columns = samples
+rownames(df_raw) == rownames(df_rf) == rownames(df_minProb)
+```
+### Run SoftHybrid (single group)
+```r
+imp <- soft_hybrid_impute(
+  df_rf,
+  df_minProb,
+  df_raw,
+  visualize = TRUE,         # saves a TIFF + RDS weight plot
+  group_name = "SCP_Group1" # optional label for filenames
+)
+```
+Output:
+- A fully imputed matrix (same dimension as input).
+- If visualize = TRUE, SoftHybrid also saves:
+  
+  - GroupName_SoftHybrid_plot.tiff — a scatter plot showing RF weights
+  - GroupName_SoftHybrid_plot.rds — ggplot object for editing
+
 ## More Information
 A detailed description of the SoftHybrid framework, together with full benchmarking analyses, is available in our preprint:
 
