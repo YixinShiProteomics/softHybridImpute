@@ -87,7 +87,7 @@ Each element of results is a fully imputed matrix.
 ## More Information
 A detailed description of the SoftHybrid framework, together with full benchmarking analyses, is available in our preprint:
 
-Shi, Y. *et al.* **SoftHybrid: A Hybrid Imputation Algorithm Optimised for Single-Cell Proteomics Data.** bioRxiv, 2025.
+Shi, Y. *et al.* **SoftHybrid: A Hybrid Imputation Algorithm Optimised for Single-Cell Proteomics Data.** bioRxiv, 2026. https://www.biorxiv.org/content/10.64898/2026.01.13.699212v1
 
 ## Contact
 For questions or suggestions, please open an issue on the GitHub repository:
