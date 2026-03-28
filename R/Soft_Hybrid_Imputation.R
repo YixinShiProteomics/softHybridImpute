@@ -13,7 +13,7 @@
 #' @param x0 Optional numeric, elbow y (mean-intensity) override. If NULL, auto-estimated.
 #' @param a Steepness for missing-rate sigmoid (default 10).
 #' @param b Steepness for intensity sigmoid (default 5).
-#' @param lambda Trade-off between missing-rate and intensity (0–1, default 0.5).
+#' @param lambda Trade-off between missing-rate and intensity (0–1, default 0.4).
 #' @param visualize Logical. If TRUE, saves a TIFF + Rdata of the weight plot.
 #' @param group_name Optional character used in plot titles/filenames.
 #' @param save_dir Directory to save plots (default "./SoftHybrid").
@@ -27,11 +27,36 @@
 #' imp <- soft_hybrid_impute(df_rf, df_minProb, df_raw, visualize = FALSE)
 #' }
 soft_hybrid_impute <- function(df_rf, df_minProb, df_raw,
-                               r0 = NULL, x0 = NULL, a = 10, b = 5, lambda = 0.5,
+                               r0 = NULL, x0 = NULL, a = 10, b = 5, lambda = 0.4,
                                visualize = TRUE, group_name = NULL,
                                save_dir = "./SoftHybrid") {
-  stopifnot(all(dim(df_rf) == dim(df_minProb)))
-  stopifnot(all(rownames(df_rf) == rownames(df_minProb)))
+  df_rf <- as.matrix(df_rf)
+  df_minProb <- as.matrix(df_minProb)
+  df_raw <- as.matrix(df_raw)
+
+  if (!all(dim(df_rf) == dim(df_minProb))) {
+    stop("df_rf and df_minProb must have the same dimensions.")
+  }
+  if (!all(dim(df_rf) == dim(df_raw))) {
+    stop("df_rf, df_minProb, and df_raw must have the same dimensions.")
+  }
+  if (is.null(rownames(df_rf)) || is.null(rownames(df_minProb)) || is.null(rownames(df_raw))) {
+    stop("df_rf, df_minProb, and df_raw must all have row names.")
+  }
+  if (!identical(rownames(df_rf), rownames(df_minProb))) {
+    stop("Row names of df_rf and df_minProb do not match.")
+  }
+  if (!identical(rownames(df_rf), rownames(df_raw))) {
+    stop("Row names of df_rf and df_raw do not match.")
+  }
+  if (!is.null(colnames(df_rf)) && !is.null(colnames(df_minProb)) &&
+      !identical(colnames(df_rf), colnames(df_minProb))) {
+    stop("Column names of df_rf and df_minProb do not match.")
+  }
+  if (!is.null(colnames(df_rf)) && !is.null(colnames(df_raw)) &&
+      !identical(colnames(df_rf), colnames(df_raw))) {
+    stop("Column names of df_rf and df_raw do not match.")
+  }
 
   missing_rate   <- rowMeans(is.na(df_raw))
   mean_intensity <- rowMeans(df_raw, na.rm = TRUE)
@@ -98,7 +123,7 @@ soft_hybrid_impute <- function(df_rf, df_minProb, df_raw,
 #' @return A named list of matrices with soft-hybrid imputations.
 #' @export
 run_soft_hybrid_all_groups <- function(raw_list, rf_list, minProb_list,
-                                       lambda = 0.5, a = 10, b = 5, visualize = TRUE) {
+                                       lambda = 0.4, a = 10, b = 5, visualize = TRUE) {
   group_names <- names(raw_list)
   result_list <- vector("list", length(group_names))
   names(result_list) <- group_names
