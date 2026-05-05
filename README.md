@@ -66,7 +66,7 @@ results <- run_soft_hybrid_all_groups(
   raw_list,
   rf_list,
   minProb_list,
-  lambda = 0.5,  # MAR/MNAR balance
+  lambda = 0.4,  # MAR/MNAR balance
   a = 10,        # missing-rate sigmoid steepness
   b = 5,         # intensity sigmoid steepness
   visualize = TRUE
